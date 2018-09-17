@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mzd.mywy.dao.WylogMapper">
+  <resultMap id="BaseResultMap" type="com.mzd.mywy.ormbean.Wylog">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="datetime" jdbcType="VARCHAR" property="datetime" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="paramvalues" jdbcType="VARCHAR" property="paramvalues" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="success" jdbcType="VARCHAR" property="success" />
+    <result column="errormessage" jdbcType="VARCHAR" property="errormessage" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, date, datetime, userid, username, ip, method, paramvalues, duration, success, 
+    errormessage, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.mzd.mywy.ormbean.WylogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wy_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.mzd.mywy.ormbean.WylogExample">
+    delete from wy_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mzd.mywy.ormbean.Wylog">
+    insert into wy_log (id, date, datetime, 
+      userid, username, ip, 
+      method, paramvalues, duration, 
+      success, errormessage, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{datetime,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{paramvalues,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, 
+      #{success,jdbcType=VARCHAR}, #{errormessage,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mzd.mywy.ormbean.Wylog">
+    insert into wy_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="datetime != null">
+        datetime,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="paramvalues != null">
+        paramvalues,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="success != null">
+        success,
+      </if>
+      <if test="errormessage != null">
+        errormessage,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="paramvalues != null">
+        #{paramvalues,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="success != null">
+        #{success,jdbcType=VARCHAR},
+      </if>
+      <if test="errormessage != null">
+        #{errormessage,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mzd.mywy.ormbean.WylogExample" resultType="java.lang.Long">
+    select count(*) from wy_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wy_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datetime != null">
+        datetime = #{record.datetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null">
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null">
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramvalues != null">
+        paramvalues = #{record.paramvalues,jdbcType=VARCHAR},
+      </if>
+      <if test="record.duration != null">
+        duration = #{record.duration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.success != null">
+        success = #{record.success,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errormessage != null">
+        errormessage = #{record.errormessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wy_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
+      datetime = #{record.datetime,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      paramvalues = #{record.paramvalues,jdbcType=VARCHAR},
+      duration = #{record.duration,jdbcType=VARCHAR},
+      success = #{record.success,jdbcType=VARCHAR},
+      errormessage = #{record.errormessage,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
