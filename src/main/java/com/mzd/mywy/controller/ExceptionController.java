@@ -1,6 +1,7 @@
 package com.mzd.mywy.controller;
 
 
+import com.mzd.mywy.exception.CongestionException;
 import com.mzd.mywy.myshiro.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -73,6 +74,15 @@ public class ExceptionController {
 
     @ExceptionHandler(value = CacheException.class)
     public HashMap Except(CacheException throwable) {
+        log.error(throwable.getMessage());
+        HashMap hashMap = new HashMap();
+        hashMap.put("errcode", 403);
+        hashMap.put("errMsg", throwable.getMessage());
+        return hashMap;
+    }
+
+    @ExceptionHandler(value = CongestionException.class)
+    public HashMap Except(CongestionException throwable) {
         log.error(throwable.getMessage());
         HashMap hashMap = new HashMap();
         hashMap.put("errcode", 403);

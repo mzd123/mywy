@@ -36,7 +36,7 @@ public class MyShiroConfig {
     }
 
 
-    @Bean("myshiroFilter")
+    //@Bean("myshiroFilter")
     public MyshiroFilter getMyshiroFilter() {
         LinkedHashMap<String, String> filter_url = new LinkedHashMap();
         filter_url.put("/swagger*/**", "anon");

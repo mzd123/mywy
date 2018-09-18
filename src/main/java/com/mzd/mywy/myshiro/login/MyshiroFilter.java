@@ -40,7 +40,8 @@ public class MyshiroFilter implements Filter {
         //这里需要获取的是uri，不是url
         String uri = request.getRequestURI() + "";
         String qx = getvalue(uri);
-        if (qx == null || qx.equals("") || qx.equals("authc")) {
+        String qx_uri = filter_url.get(qx);
+        if (qx_uri == null || qx_uri.equals("") || qx_uri.equals("authc")) {
             //说明不能匿名访问
             String iflogin = MyStringUtils.Object2String(request.getSession().getAttribute(CacheEnum.getvalue(CacheEnum.iflogin)));
             if (iflogin.equals("")) {
